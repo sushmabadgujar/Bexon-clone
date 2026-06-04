@@ -1,0 +1,71 @@
+
+// export default App
+import {  BrowserRouter,Routes, Route, Navigate } from "react-router-dom";
+// import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Dashboard from "./pages/Dashboard.jsx";
+import Profile from "./pages/Profile.jsx";
+import EditProfile from "./pages/EditProfile.jsx";
+import "./App.css";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import AdminLayout from "./layout/AdminLayout";
+import Team from "./pages/Team/TeamCreate.jsx";
+import TeamList from "./pages/Team/TeamList.jsx";
+import TeamEdit from "./pages/Team/TeamEdit.jsx";
+function App() {
+  return (
+    
+    <BrowserRouter>
+      <ToastContainer position="top-right" autoClose={3000} />
+    <Routes>
+
+      {/* ADMIN LAYOUT */}
+      <Route path="/" element={<AdminLayout />}>
+      
+                {/* DEFAULT */}
+        <Route
+          index
+          element={<Navigate to="/dashboard" />}
+        />
+
+        {/* DASHBOARD */}
+        <Route
+          path="dashboard"
+          element={<Dashboard />}
+        />
+
+        {/* PROFILE */}
+        <Route
+          path="profile"
+          element={<Profile />}
+        />
+        {/* PROFILE */}
+        <Route
+          path="edit-profile"
+          element={<EditProfile />}
+          
+        />
+         {/* PROFILE */}
+        <Route
+          path="team"
+          element={<Team />}
+          
+        />
+        <Route
+          path="team-list"
+          element={<TeamList />}
+          
+        />
+
+     <Route path="/edit/:id" element={<TeamEdit />} />
+
+      </Route>
+    </Routes>
+     </BrowserRouter>
+     
+  );
+}
+
+export default App;
