@@ -1,6 +1,6 @@
 
 // export default App
-import {  BrowserRouter,Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 // import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Dashboard from "./pages/Dashboard.jsx";
@@ -14,57 +14,77 @@ import AdminLayout from "./layout/AdminLayout";
 import Team from "./pages/Team/TeamCreate.jsx";
 import TeamList from "./pages/Team/TeamList.jsx";
 import TeamEdit from "./pages/Team/TeamEdit.jsx";
+import Service from "./pages/service/ServiceCreate.jsx";
+import ServiceList from "./pages/service/ServiceList";
+import ServiceEdit from "./pages/service/ServiceEdit.jsx";
 function App() {
   return (
-    
+
     <BrowserRouter>
-      <ToastContainer position="top-right" autoClose={3000} />
-    <Routes>
+      <ToastContainer position="top-right" autoClose={2000} />
 
-      {/* ADMIN LAYOUT */}
-      <Route path="/" element={<AdminLayout />}>
-      
-                {/* DEFAULT */}
-        <Route
-          index
-          element={<Navigate to="/dashboard" />}
-        />
+      <Routes>
 
-        {/* DASHBOARD */}
-        <Route
-          path="dashboard"
-          element={<Dashboard />}
-        />
+        {/* ADMIN LAYOUT */}
+        <Route path="/" element={<AdminLayout />}>
 
-        {/* PROFILE */}
-        <Route
-          path="profile"
-          element={<Profile />}
-        />
-        {/* PROFILE */}
-        <Route
-          path="edit-profile"
-          element={<EditProfile />}
-          
-        />
-         {/* PROFILE */}
-        <Route
-          path="team"
-          element={<Team />}
-          
-        />
-        <Route
-          path="team-list"
-          element={<TeamList />}
-          
-        />
+          {/* DEFAULT */}
+          <Route
+            index
+            element={<Navigate to="/dashboard" />}
+          />
 
-     <Route path="/edit/:id" element={<TeamEdit />} />
+          {/* DASHBOARD */}
+          <Route
+            path="dashboard"
+            element={<Dashboard />}
+          />
 
-      </Route>
-    </Routes>
-     </BrowserRouter>
-     
+          {/* PROFILE */}
+          <Route
+            path="profile"
+            element={<Profile />}
+          />
+          {/* PROFILE */}
+          <Route
+            path="edit-profile"
+            element={<EditProfile />}
+
+          />
+          {/* PROFILE */}
+          <Route
+            path="team"
+            element={<Team />}
+
+          />
+          <Route
+            path="team-list"
+            element={<TeamList />}
+
+          />
+
+          <Route
+            path="service"
+            element={<Service />}
+
+          />
+
+          <Route
+            path="service-list"
+            element={<ServiceList />}
+
+          />
+          <Route
+            path="/services/:id"
+            element={<ServiceEdit />}
+
+          />
+          <Route path="/edit/:id" element={<TeamEdit />} />
+
+        </Route>
+      </Routes>
+    </BrowserRouter>
+
   );
 }
 

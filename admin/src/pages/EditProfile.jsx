@@ -128,10 +128,10 @@ const EditProfile = () => {
         <div className="container py-4">
 
             {/* HEADER */}
-            <h3 className="fw-bold">Settings</h3>
+            {/* <h3 className="fw-bold">Settings</h3>
             <p className="text-muted">
                 Manage your account settings and preferences.
-            </p>
+            </p> */}
 
             {/* TABS */}
             <div className="d-flex gap-2 mb-4">

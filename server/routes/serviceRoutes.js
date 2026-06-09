@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-
+const upload = require("../middleware/upload");
 const {
   createService,
   getAllServices,
@@ -12,12 +12,19 @@ const {
 const authMiddleware = require("../middleware/authMiddleware");
 
 // PUBLIC ROUTES
-router.get("/all-services", getAllServices);
+router.get("/", getAllServices);
+
 router.get("/:id", getServiceById);
 
 // ADMIN ROUTES
-router.post("/create-services", authMiddleware, createService);
-router.put("/:id", authMiddleware, updateService);
+router.post("/",upload.single("image"), authMiddleware, createService);
+
+router.put(
+  "/:id",
+  upload.single("image"),
+  authMiddleware,
+  updateService
+);
 router.delete("/:id", authMiddleware, deleteService);
 
 module.exports = router;

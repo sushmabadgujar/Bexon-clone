@@ -24,7 +24,23 @@ const AdminLayout = () => {
 
         {/* PAGE CONTENT */}
         <div className="zn-page-content">
+          {/* PAGE HEADER */}
+          <div className="zn-pr-pageHeader p-3 mb-0">
 
+            <div className="zn-pr-breadcrumb">
+              Dashboard
+              <span>›</span>
+              Profile
+            </div>
+
+            <h2 className="zn-pr-pageTitle">
+              Profile
+            </h2>
+
+            <p className="zn-pr-pageSubTitle">
+              View and manage your profile information.
+            </p>
+          </div>
           <Outlet />
 
         </div>

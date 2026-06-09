@@ -9,11 +9,11 @@ import {
     BsBox,
     BsEnvelope,
     BsChevronDown,
-    BsBoxArrowRight,BsTools,BsFolder,
+    BsBoxArrowRight, BsTools, BsFolder,
     BsFileText,
     BsPeople,
-    BsBriefcase ,
-          
+    BsBriefcase,
+
 } from "react-icons/bs";
 
 const Sidebar = ({ setActivePage }) => {
@@ -85,23 +85,34 @@ const Sidebar = ({ setActivePage }) => {
                                     : "zn-sidebar__item"
                             }
                         >
-                           <BsBriefcase />
+                            <BsBriefcase />
                             <span>Career</span>
                         </NavLink>
 
 
                         <NavLink
-                            to="/services"
+                            to="/service"
                             className={({ isActive }) =>
                                 isActive
                                     ? "zn-sidebar__item zn-sidebar__item--active"
                                     : "zn-sidebar__item"
                             }
                         >
-                           <BsTools/>
+                            <BsTools />
                             <span>Services</span>
                         </NavLink>
 
+                        <NavLink
+                            to="/service-list"
+                            className={({ isActive }) =>
+                                isActive
+                                    ? "zn-sidebar__item zn-sidebar__item--active"
+                                    : "zn-sidebar__item"
+                            }
+                        >
+                            <BsTools />
+                            <span>Services List</span>
+                        </NavLink>
 
                         <NavLink
                             to="/portfolio"

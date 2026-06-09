@@ -86,25 +86,6 @@ const Profile = () => {
 
   return (
     <div className="zn-pr-wrapper container-fluid">
-
-      {/* PAGE HEADER */}
-      <div className="zn-pr-pageHeader">
-
-        <div className="zn-pr-breadcrumb">
-          Dashboard
-          <span>›</span>
-          Profile
-        </div>
-
-        <h2 className="zn-pr-pageTitle">
-          Profile
-        </h2>
-
-        <p className="zn-pr-pageSubTitle">
-          View and manage your profile information.
-        </p>
-      </div>
-
       {/* PROFILE CARD */}
       <div className="zn-pr-profileCard">
 
