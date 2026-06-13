@@ -125,7 +125,17 @@ const Sidebar = ({ setActivePage }) => {
                             <BsFolder />
                             <span>Portfolio</span>
                         </NavLink>
-
+                            <NavLink
+                            to="/portfolio-list"
+                            className={({ isActive }) =>
+                                isActive
+                                    ? "zn-sidebar__item zn-sidebar__item--active"
+                                    : "zn-sidebar__item"
+                            }
+                        >
+                            <BsFolder />
+                            <span>Portfolio List</span>
+                        </NavLink>
 
                         <NavLink
                             to="/team"

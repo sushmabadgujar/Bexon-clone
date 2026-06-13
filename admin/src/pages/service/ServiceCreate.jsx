@@ -30,10 +30,10 @@ const Service = () => {
       const formData = buildFormData(form);
 
       if (file) {
-        formData.append("image", file);
+        form.append("image", file);
       }
 
-      await createService(formData);
+      await createService(form);
        showSuccess("Service created");
     
     } catch (error) {

@@ -17,6 +17,9 @@ import TeamEdit from "./pages/Team/TeamEdit.jsx";
 import Service from "./pages/service/ServiceCreate.jsx";
 import ServiceList from "./pages/service/ServiceList";
 import ServiceEdit from "./pages/service/ServiceEdit.jsx";
+import PortFolio from "./pages/Portfolio/PorfolioCreate.jsx";
+import PortfolioList from "./pages/Portfolio/PorfolioList.jsx";
+import PortfolioEdit from "./pages/Portfolio/PorfolioEdit.jsx";
 function App() {
   return (
 
@@ -80,7 +83,10 @@ function App() {
 
           />
           <Route path="/edit/:id" element={<TeamEdit />} />
+          <Route path = "portfolio" element={<PortFolio/>}/>
+          <Route path = "portfolio-list" element={<PortfolioList/>}/>
 
+          <Route path = "/portfolio/edit/:id" element={<PortfolioEdit/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

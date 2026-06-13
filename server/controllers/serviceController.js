@@ -8,8 +8,6 @@ const path = require("path");
 const createService = async (req, res) => {
   try {
     const body = parseJSON(req.body);
-    console.log(body);
-    
     const {
       title,
       shortDescription,

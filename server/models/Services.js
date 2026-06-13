@@ -4,8 +4,8 @@ const serviceSchema = new mongoose.Schema(
   {
     title: {
       type: String,
-      required: true,
-      trim: true
+      // required: true,
+      // trim: true
     },
 
     slug: {
