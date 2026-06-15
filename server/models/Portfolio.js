@@ -1,5 +1,3 @@
-// models/Portfolio.js
-
 const mongoose = require("mongoose");
 
 const portfolioSchema = new mongoose.Schema(
@@ -26,7 +24,7 @@ const portfolioSchema = new mongoose.Schema(
 
     gallery: [
       {
-        type: String // image URL
+        type: String 
       }
     ],
 

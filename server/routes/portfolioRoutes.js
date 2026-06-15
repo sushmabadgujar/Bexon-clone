@@ -1,5 +1,3 @@
-// routes/portfolioRoutes.js
-
 const express = require("express");
 const router = express.Router();
 const upload = require("../middleware/upload");
@@ -8,7 +6,8 @@ const {
   getAllPortfolios,
   getPortfolioById,
   updatePortfolio,
-  deletePortfolio
+  deletePortfolio,
+  deletePortfolioImage
 } = require("../controllers/portfolioController");
 
 router.post("/create-portfolio", upload.array("gallery", 10),  createPortfolio);
@@ -19,6 +18,8 @@ router.put(
   upload.array("gallery", 10),
   updatePortfolio
 );
-// router.delete("/delete/:id", deletePortfolio);
+
+router.delete("/:id/image", deletePortfolioImage);
+router.delete("/delete/:id", deletePortfolio);
 
 module.exports = router;

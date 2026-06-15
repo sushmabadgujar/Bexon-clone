@@ -40,10 +40,6 @@ const PortFolio = () => {
       const form = buildFormData(formData);
       console.log(formData.gallery);
       const res = await createPortfolio(form);
-      // if (file) {
-      //   form.append("gallery", file);
-      // }
-      // const res = await createPortfolio(formData);
       
       if (res.success) {
         showSuccess("Portfolio Created Successfully");

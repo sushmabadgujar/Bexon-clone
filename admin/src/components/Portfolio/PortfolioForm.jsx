@@ -6,6 +6,8 @@ const PortfolioForm = ({
   handleSubmit,
   loading,
   buttonText = "Save Portfolio",
+  existingGallery,
+  removeExistingImage,
 }) => {
   return (
     <div className="card shadow-sm border-0">
@@ -25,18 +27,6 @@ const PortfolioForm = ({
                 required
               />
             </div>
-
-            {/* <div className="col-md-6 mb-3">
-          <label>Slug</label>
-          <input
-            type="text"
-            name="slug"
-            className="form-control"
-            value={formData.slug}
-            onChange={handleChange}
-          />
-        </div> */}
-
             <div className="col-md-12 mb-3">
               <label>Short Description</label>
               <textarea
@@ -69,22 +59,58 @@ const PortfolioForm = ({
                 onChange={handleChange}
               />
             </div>
-
             <div className="col-md-12 mb-3">
-              <label>Gallery</label>
+              <label className="form-label fw-semibold">Gallery</label>
+
               <input
                 type="file"
                 name="gallery"
                 multiple
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    gallery: Array.from(e.target.files),
-                  })
-                }
+                className="form-control"
+                onChange={handleChange}
               />
             </div>
 
+            {/* Existing Images Section */}
+            {existingGallery?.length > 0 && (
+              <div className="col-md-12 mb-4">
+                <label className="form-label fw-semibold">
+                  Existing Images
+                </label>
+
+                <div className="row g-3">
+                  {existingGallery.map((img, index) => (
+                    <div key={index} className="col-6 col-md-3 col-lg-2">
+                      <div className="card shadow-sm border-0 h-100">
+
+                        {/* Image */}
+                        <img
+                          src={`${import.meta.env.VITE_API_URL}${img}`}
+                          alt="gallery"
+                          className="card-img-top"
+                          style={{
+                            height: "150px",
+                            objectFit: "cover",
+                          }}
+                        />
+
+                        {/* Remove Button */}
+                        <div className="card-body p-2 text-center">
+                          <button
+                            type="button"
+                            className="btn btn-outline-danger btn-sm w-100"
+                            onClick={() => removeExistingImage(img,index)}
+                          >
+                            Remove
+                          </button>
+                        </div>
+
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
             <div className="col-md-6 mb-3">
               <label>Client Name</label>
               <input

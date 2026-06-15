@@ -4,66 +4,12 @@ const parseJSON = require("../utils/parseJSON");
 const fs = require("fs");
 const path = require("path");
 
-
-// const createPortfolio = async (req, res) => {
-//   console.log(req.data);
-//   try {
-//     // const {
-//     //   title,
-//     //   slug,
-//     //   shortDescription,
-//     //   longDescription,
-//     //   overview,
-//     //   clientName,
-//     //   budget,
-//     //   location,
-//     //   sector,
-//     //   completedAt
-//     // } = req.body;
-//    console.log("working");
-//     // 🖼️ gallery images (multer files)
-//     // const gallery = req.files
-//     //   ? req.files.map((file) => file.path || file.filename)
-//     //   : [];
-
-//     const data = await Portfolio.create({
-//       title,
-//       slug,
-//       shortDescription,
-//       longDescription,
-//       overview: overview
-//         ? Array.isArray(overview)
-//           ? overview
-//           : overview.split(",")
-//         : [],
-
-//       gallery : req.file ? `/uploads/${req.file.filename}` : "",
-//       clientName,
-//       budget,
-//       location,
-//       sector,
-//       completedAt
-//     });
-
-//     res.status(201).json({
-//       success: true,
-//       data
-//     });
-
-//   } catch (error) {
-//     res.status(500).json({
-//       success: false,
-//       message: error.message
-//     });
-//   }
-// };
-
+// ============= Create ==================
 const createPortfolio = async (req, res) => {
   try {
     const body = parseJSON(req.body);
     const {
       title,
-      // slug,
       shortDescription,
       longDescription,
       overview,
@@ -80,6 +26,7 @@ const createPortfolio = async (req, res) => {
     const gallery = req.files
       ? req.files.map((file) => `/uploads/${file.filename}`)
       : [];
+
     const data = await Portfolio.create({
       title,
       shortDescription,
@@ -107,8 +54,7 @@ const createPortfolio = async (req, res) => {
   }
 };
 
-
-// GET ALL
+// =============== Get All =====================
 const getAllPortfolios = async (req, res) => {
   try {
     const data = await Portfolio.find();
@@ -118,42 +64,31 @@ const getAllPortfolios = async (req, res) => {
   }
 };
 
-// GET SINGLE (portfolio details page)
-const getPortfolioById= async (req, res) => {
+//============= GET SINGLE ===============
+const getPortfolioById = async (req, res) => {
   try {
     const data = await Portfolio.findById(req.params.id);
-    
+
     res.json({ success: true, data });
   } catch (error) {
     res.status(500).json({ success: false });
   }
 };
 
-// UPDATE
-// exports.updatePortfolio = async (req, res) => {
-//   try {
-//     const data = await Portfolio.findByIdAndUpdate(
-//       req.params.id,
-//       req.body,
-//       { new: true }
-//     );
-//     res.json({ success: true, data });
-//   } catch (error) {
-//     res.status(500).json({ success: false });
-//   }
-// };
+// ============= Update Portfolio =================
 const updatePortfolio = async (req, res) => {
   try {
     const body = JSON.parse(JSON.stringify(req.body));
-
-    const gallery = req.files
+    const portfolio = await Portfolio.findById(req.params.id);
+    let existingGallery = portfolio.gallery || [];
+    const newGallery = req.files
       ? req.files.map((f) => `/uploads/${f.filename}`)
       : [];
-
+    const finalGallery = [...existingGallery, ...newGallery];
     const updatedData = {
       ...body,
       overview: body.overview ? body.overview.split(",") : [],
-      ...(gallery.length && { gallery }),
+      gallery: finalGallery,
     };
 
     const data = await Portfolio.findByIdAndUpdate(
@@ -167,15 +102,91 @@ const updatePortfolio = async (req, res) => {
     res.status(500).json({ success: false, message: err.message });
   }
 };
-// DELETE
-exports.deletePortfolio = async (req, res) => {
+
+// ============= Delete PortFolio sperate image =============
+
+const deletePortfolioImage = async (req, res) => {
   try {
-    await Portfolio.findByIdAndDelete(req.params.id);
-    res.json({ success: true, message: "Deleted" });
+    const { id } = req.params;
+    const { image } = req.body;
+
+    const portfolio = await Portfolio.findById(id);
+
+    if (!portfolio) {
+      return res.status(404).json({
+        success: false,
+        message: "Portfolio not found",
+      });
+    }
+
+    portfolio.gallery = portfolio.gallery.filter(
+      (img) => img !== image
+    );
+
+    await portfolio.save();
+
+    const filePath = path.join(
+      __dirname,
+      "..",
+      image.replace(/^\//, "")
+    );
+
+    if (fs.existsSync(filePath)) {
+      fs.unlinkSync(filePath);
+    }
+
+    res.json({
+      success: true,
+      message: "Image deleted successfully",
+    });
   } catch (error) {
-    res.status(500).json({ success: false });
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+//================ Delete Portfolio ========================
+
+const deletePortfolio = async (req, res) => {
+  try {
+    const portfolio = await Portfolio.findById(req.params.id);
+
+    if (!portfolio) {
+      return res.status(404).json({
+        success: false,
+        message: "Portfolio not found",
+      });
+    }
+
+    // Delete all gallery images
+    if (portfolio.gallery && portfolio.gallery.length > 0) {
+      portfolio.gallery.forEach((image) => {
+        const imagePath = path.join(__dirname, "..", image);
+
+        fs.unlink(imagePath, (err) => {
+          if (err) {
+            console.error("Image delete error:", err.message);
+          }
+        });
+      });
+    }
+
+    await Portfolio.findByIdAndDelete(req.params.id);
+
+    res.json({
+      success: true,
+      message: "Portfolio and images deleted successfully",
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };
 module.exports = {
-  createPortfolio,getAllPortfolios,getPortfolioById,updatePortfolio
+  createPortfolio, getAllPortfolios, getPortfolioById, updatePortfolio, deletePortfolioImage,deletePortfolio
 };
