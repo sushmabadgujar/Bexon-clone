@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import TeamForm from "../../components/team/TeamForm";
-
+import { useParams, useNavigate } from "react-router-dom";
 import { showSuccess, showError } from "../../utils/toast";
 import { createTeam } from "../../services/teamService";
 import { buildFormData } from "../../utils/buildFormData";
 const TeamCreate = () => {
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   const SKILLS_LIST = [
     "Business Consultants",
     "Client Communication",
@@ -43,6 +44,7 @@ const TeamCreate = () => {
         formData.append("image", file);
       }
       await createTeam(formData);
+      navigate("/team-list");
       showSuccess("Team member created");
 
     } catch (err) {

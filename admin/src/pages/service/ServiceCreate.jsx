@@ -3,8 +3,9 @@ import ServiceForm from "../../components/service/ServiceForm";
 import { createService } from "../../services/serviceService";
 import { buildFormData } from "../../utils/buildFormData";
 import { showSuccess, showError } from "../../utils/toast";
+import { useNavigate } from "react-router-dom";
 const Service = () => {
-
+   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
   const [file, setFile] = useState(null);
@@ -30,17 +31,15 @@ const Service = () => {
       const formData = buildFormData(form);
 
       if (file) {
-        form.append("image", file);
+        formData.append("image", file);
       }
 
-      await createService(form);
-       showSuccess("Service created");
-    
+      await createService(formData);
+      navigate('/service-list');
+      showSuccess("Service created succesfully");
+
     } catch (error) {
-      showError(
-              error?.response?.data?.message ||
-              "Failed to create member"
-            );
+      showError(error);
     } finally {
       setLoading(false);
     }

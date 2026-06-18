@@ -8,7 +8,6 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 
 app.use(express.json());
-console.log(process.env.CLIENT_URL);
 app.use(
   cors({
     origin: process.env.CLIENT_URL,
@@ -37,6 +36,15 @@ app.use("/api/blogs", blogRoutes);
 // ============ team Routes ===============
 const teamRoutes = require("./routes/teamRoutes");
 app.use("/api/team", teamRoutes);
+
+// ============ Pricing Plan Routes ==============
+const pricingPlanRoutes = require("./routes/PricingPlanRoutes");
+app.use("/api/pricing", pricingPlanRoutes);
+
+// ============ Pricing Plan Routes ==============
+const careerRoutes = require("./routes/careerRoutes");
+app.use("/api", careerRoutes);
+
 // ============ Database Connection ================
 const startServer = async () => {
   try {

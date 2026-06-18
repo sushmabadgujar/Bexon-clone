@@ -6,19 +6,19 @@ const router = express.Router();
 const {
   createBlog,
   getAllBlogs,
-  getBlogBySlug,
+  getBlogById,
   updateBlog,
   deleteBlog,
-  addComment
+  // addComment
 } = require("../controllers/blogController");
 
 router.post("/create-blog", createBlog);
 router.get("/get-blog", getAllBlogs);
-router.get("/:slug", getBlogBySlug);
+router.get("/:id", getBlogById);
 router.put("/:id", updateBlog);
 router.delete("/:id", deleteBlog);
 
 // comments
-router.post("/:id/comment", addComment);
+// router.post("/:id/comment", addComment);
 
 module.exports = router;

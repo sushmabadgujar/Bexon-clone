@@ -16,7 +16,6 @@ const ServiceList = () => {
         try {
             setLoading(true);
             const res = await getServices();
-            console.log("res", res);
             setServices(res.data.data);
 
         } catch (error) {
@@ -45,13 +44,12 @@ const handleDelete = async (id) => {
     return (
         <div className="container mt-4">
             <div className="d-flex justify-content-between align-items-center mb-3">
-                <h3>Services</h3>
-
+                
                 <button
-                    className="btn btn-primary"
+                    className="btn btn-dark"
                     onClick={() => navigate("/services/create")}
                 >
-                    + Add Service
+                Add Service
                 </button>
             </div>
 

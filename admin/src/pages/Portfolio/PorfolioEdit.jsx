@@ -27,7 +27,6 @@ const PortfolioEdit = () => {
   // GET BY ID
   useEffect(() => {
     const fetchData = async () => {
-      console.log("fetchid working");
       const res = await getPortfolioById(id);
       const data = res.data.data;
 
@@ -39,10 +38,7 @@ const PortfolioEdit = () => {
           ? new Date(data.completedAt).toISOString().split("T")[0]
           : "",
       });
-      console.log("FULL API RESPONSE:", res);
-      console.log("DATA:", res.data.data);
-      console.log("GALLERY:", res.data.data?.gallery);
-
+     
       setExistingGallery(data.gallery || []);
     };
 
@@ -71,8 +67,8 @@ const PortfolioEdit = () => {
       const res = await updatePortfolio(id, form);
 
       if (res.data.success) {
+        navigate("/portfolio-list");
         showSuccess("Portfolio Updated Successfully");
-        navigate("/portfolio");
       }
     } catch (error) {
       console.log(error);

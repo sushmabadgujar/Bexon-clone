@@ -66,10 +66,6 @@ const TeamList = () => {
     return (
         <div className="card shadow-sm border-0">
             <div className="d-flex justify-content-between mt-3 p-3">
-                <h3 className="fw-bold">
-                    Team Management
-                </h3>
-
                 <div><Link
                     to="/team/create"
                     className="btn btn-dark"
@@ -78,8 +74,6 @@ const TeamList = () => {
                 </Link></div>
             </div>
             <div className="card-body">
-                <h4 className="mb-4">Team List</h4>
-
                 <div className="table-responsive">
                     <table className="table table-bordered align-middle">
                         <thead>

@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams,useNavigate } from "react-router-dom";
 import TeamForm from "../../components/team/TeamForm";
 import { getSingleTeam, updateTeam } from "../../services/teamService";
 import { buildFormData } from "../../utils/buildFormData";
+import { showError, showSuccess } from "../../utils/toast";
 
 const TeamEdit = () => {
     const { id } = useParams();
     const [loading, setLoading] = useState(false);
     const [file, setFile] = useState(null);
-
+    const navigate = useNavigate();
     const [form, setForm] = useState({
         name: "",
         designation: "",
@@ -33,7 +34,6 @@ const TeamEdit = () => {
             try {
                 const res = await getSingleTeam(id);
                 const data = res.data.data;
-                console.log("FULL RESPONSE:", res);
                 setForm({
                     name: data.name || "",
                     designation: data.designation || "",
@@ -78,10 +78,10 @@ const TeamEdit = () => {
             }
           
             await updateTeam(id, formData);
-
-            alert("Updated Successfully");
+            navigate('/team-list');
+            showSuccess("Updated Successfully");
         } catch (err) {
-            console.log(err);
+            showError(err);
         } finally {
             setLoading(false);
         }

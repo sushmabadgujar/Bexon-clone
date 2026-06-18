@@ -31,6 +31,15 @@ const PortfolioList = () => {
 
   return (
     <div className="container">
+      <div className="d-flex justify-content-between align-items-center mb-3">
+                <button
+                    className="btn btn-dark mt-3"
+                    onClick={() => navigate("/portfolio")}
+                >
+                Add Portfolio
+                </button>
+            </div>
+    
       <div className="row">
         {portfolios.map((item) => (
           <div className="col-md-4 mb-4" key={item._id}>

@@ -1,7 +1,6 @@
 import React from "react";
 
-import { Outlet } from "react-router-dom";
-
+import { Outlet,useLocation } from "react-router-dom";
 import Sidebar from "../components/header.jsx";
 import TopBar from "../components/topbar.jsx";
 import "../assets/styles/header.css"
@@ -9,7 +8,25 @@ import "../assets/styles/topbar.css"
 import "../assets/styles/profile.css"
 import "../assets/styles/editprofile.css"
 import "../assets/styles/dashboard.css";
+const pageTitles = {
+  "/dashboard": "Dashboard",
+  "/team": "Add Team Member",
+  "/team-list": "Team List",
+  "/service": "Add Service",
+  "/service-list": "Service List",
+  "/portfolio": "Add Portfolio",
+  "/portfolio-list": "Portfolio List",
+  "/blog": "Add Blog",
+  "/blog-list": "Blog List",
+   "/price-plan": "Add Pricing Plan",
+  "/price-plan-list": "Pricing Plan List",
+  "/career": "Add Career Detail",
+  "/career-list": "Opening Vacancy List",
+};
 const AdminLayout = () => {
+  const location = useLocation();
+   const title = pageTitles[location.pathname] || "Dashboard";
+
   return (
     <div className="zn-layout">
 
@@ -28,18 +45,14 @@ const AdminLayout = () => {
           <div className="zn-pr-pageHeader p-3 mb-0">
 
             <div className="zn-pr-breadcrumb">
-              Dashboard
+             Dashboard
               <span>›</span>
-              Profile
+               {title}
             </div>
 
             <h2 className="zn-pr-pageTitle">
-              Profile
+              {title}
             </h2>
-
-            <p className="zn-pr-pageSubTitle">
-              View and manage your profile information.
-            </p>
           </div>
           <Outlet />
 

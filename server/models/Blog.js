@@ -1,5 +1,3 @@
-// models/Blog.js
-
 const mongoose = require("mongoose");
 
 const commentSchema = new mongoose.Schema(
@@ -29,7 +27,7 @@ const blogSchema = new mongoose.Schema(
     shortDescription: String,
 
     content: {
-      type: String, // HTML content
+      type: String, 
       required: true
     },
 

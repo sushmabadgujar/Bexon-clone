@@ -20,6 +20,15 @@ import ServiceEdit from "./pages/service/ServiceEdit.jsx";
 import PortFolio from "./pages/Portfolio/PorfolioCreate.jsx";
 import PortfolioList from "./pages/Portfolio/PorfolioList.jsx";
 import PortfolioEdit from "./pages/Portfolio/PorfolioEdit.jsx";
+import BlogCreate from "./pages/Blog/BlogCreate.jsx";
+import BlogList from "./pages/Blog/BlogList.jsx";
+import BlogEdit from "./pages/Blog/BlogEdit.jsx";
+import PricingPlanCreate from "./pages/PricePlan/PricePlanCreate.jsx";
+import PricingPlanList from "./pages/PricePlan/PricePlanList.jsx";
+import PricingPlanEdit from "./pages/PricePlan/PricePlanEdit.jsx";
+import CareerCreate from "./pages/career/CareerCreate.jsx";
+import CareerList from "./pages/career/CareerList.jsx";
+import CareerEdit from "./pages/career/CareerEdit.jsx";
 function App() {
   return (
 
@@ -87,6 +96,18 @@ function App() {
           <Route path = "portfolio-list" element={<PortfolioList/>}/>
 
           <Route path = "/portfolio/edit/:id" element={<PortfolioEdit/>}/>
+
+          <Route path = "/blog" element={<BlogCreate/>}/>
+          <Route path = "/blog-list" element={<BlogList/>}/>
+          <Route path = "/blog/edit/:id" element={<BlogEdit/>}/>
+
+          <Route path = "/price-plan" element={<PricingPlanCreate/>}/>
+          <Route path = "/price-plan-list" element={<PricingPlanList/>}/>
+          <Route path = "/pricing-plan/edit/:id" element={<PricingPlanEdit/>}/>
+
+          <Route path = "/career" element={<CareerCreate/>}/>
+          <Route path = "/career-list" element={<CareerList/>}/>
+          <Route path = "/career/edit/:id" element={<CareerEdit/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

@@ -2,14 +2,16 @@ const Blog = require("../models/Blog");
 const generateSlug = require("../utils/generateSlug");
 
 // CREATE BLOG
-exports.createBlog = async (req, res) => {
+const createBlog = async (req, res) => {
     try {
-        const { title, shortDescription,content,longDescription, featuredImage, author, tags, category,comments,isPublished } = req.body;
+        const { title, shortDescription, content, longDescription, featuredImage, author, tags, category, comments, isPublished } = req.body;
 
         const slug = generateSlug(title);
 
         const blog = await Blog.create({
-           slug, title, shortDescription,content,longDescription, featuredImage, author, tags, category,comments,isPublished 
+            slug, title, shortDescription, content, longDescription,
+            featuredImage,
+            author, tags, category, comments, isPublished
         });
         res.status(201).json({ success: true, blog });
     } catch (err) {
@@ -18,7 +20,7 @@ exports.createBlog = async (req, res) => {
 };
 
 // GET ALL BLOGS (listing page)
-exports.getAllBlogs = async (req, res) => {
+const getAllBlogs = async (req, res) => {
     try {
         const blogs = await Blog.find().sort({ createdAt: -1 });
         res.json({ success: true, blogs });
@@ -28,17 +30,36 @@ exports.getAllBlogs = async (req, res) => {
 };
 
 // GET SINGLE BLOG (blog details page)
-exports.getBlogBySlug = async (req, res) => {
-    try {
-        const blog = await Blog.findOne({ slug: req.params.slug });
-        res.json({ success: true, blog });
-    } catch (err) {
-        res.status(500).json({ success: false });
+const getBlogById = async (req, res) => {
+  try {
+    console.log("working");
+    console.log(req.params.id);
+
+    const blog = await Blog.findById(req.params.id);
+
+    if (!blog) {
+      return res.status(404).json({
+        success: false,
+        message: "Blog not found",
+      });
     }
+
+    res.json({
+      success: true,
+      blog,
+    });
+  } catch (err) {
+    console.error(err);
+
+    res.status(500).json({
+      success: false,
+      message: err.message,
+    });
+  }
 };
 
 // UPDATE BLOG
-exports.updateBlog = async (req, res) => {
+const updateBlog = async (req, res) => {
     try {
         const blog = await Blog.findByIdAndUpdate(
             req.params.id,
@@ -52,7 +73,7 @@ exports.updateBlog = async (req, res) => {
 };
 
 // DELETE BLOG
-exports.deleteBlog = async (req, res) => {
+deleteBlog = async (req, res) => {
     try {
         await Blog.findByIdAndDelete(req.params.id);
         res.json({ success: true, message: "Blog deleted" });
@@ -73,4 +94,8 @@ exports.addComment = async (req, res) => {
     } catch (err) {
         res.status(500).json({ success: false });
     }
+};
+
+module.exports = {
+ createBlog,getAllBlogs,getBlogById,updateBlog,deleteBlog
 };

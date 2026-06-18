@@ -3,7 +3,9 @@ import PortfolioForm from "../../components/portfolio/PortfolioForm";
 import { createPortfolio } from "../../services/portfolioService";
 import { showSuccess, showError } from "../../utils/toast";
 import { buildFormData } from "../../utils/buildFormData";
+import { useNavigate } from "react-router-dom";
 const PortFolio = () => {
+   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [file, setFile] = useState(null);
   const [formData, setFormData] = useState({
@@ -38,10 +40,9 @@ const PortFolio = () => {
     try {
       setLoading(true);
       const form = buildFormData(formData);
-      console.log(formData.gallery);
       const res = await createPortfolio(form);
-      
-      if (res.success) {
+      if (res.data.success) {
+        navigate('/portfolio-list');
         showSuccess("Portfolio Created Successfully");
       }
     } catch (error) {

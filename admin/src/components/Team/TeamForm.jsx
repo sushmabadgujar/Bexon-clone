@@ -12,12 +12,6 @@ const TeamForm = ({
     return (
         <div className="card border-0 shadow-sm">
             <div className="card-body p-4">
-
-                <h5 className="mb-1">Team Member</h5>
-                <p className="text-muted mb-4">
-                    Manage team member information.
-                </p>
-
                 <form onSubmit={onSubmit}>
 
                     {/* IMAGE */}

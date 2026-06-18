@@ -23,16 +23,6 @@ const Dashboard = () => {
       <main className="zn-db-main-content">
         {/* Topbar */}
          
-        {/* Page Title */}
-        <div className="mb-4">
-          <h1 className="zn-db-page-title">Dashboard</h1>
-
-          <p className="zn-db-page-subtitle">
-            Welcome back, Aigars. Here's what's happening with your business
-            today.
-          </p>
-        </div>
-
         {/* Stat Cards */}
         <div className="row">
           <div className="col-xl-3 col-lg-6 col-md-6 mb-4">

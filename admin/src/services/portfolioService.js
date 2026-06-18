@@ -4,8 +4,6 @@ const API_URL = `${import.meta.env.VITE_API_URL}/api/portfolios`;
 
 // Create Portfolio[post][http://localhost:5000/api/portfolios/create-portfolio]
 export const createPortfolio = async (form) => {
-  console.log("Form Data:", form);
-
   return axios.post(
     `${API_URL}/create-portfolio`,
     form
